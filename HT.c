@@ -1,7 +1,6 @@
 /**************************************************************************
  * Ohjelma: Itseään tasapainoittava binäärinen hakupuu
  * Tekijä: Hugo Hutri
- * Opiskelijanumero: 0523331
  * Aika: Marraskuu 2019
  * Lähteet:
  *      M. Penttonen, Johdatus algoritmien suunnitteluun ja analysointiin
@@ -91,14 +90,14 @@ int main(int argc, char **argv) {
     /* Lopetus ja muistin vapauttaminen */
     printf("Vapautetaan solmut: ");
     vapautaPuunMuisti(juuri);
-    printf("\nKiitos ohjelman käytöstä\n");
+    printf("\n");
     return 0;
 }
 
-/**********************************
- * Etsitään avain rekursiivisesti
+/***********************************************************
+ * Etsitään avain rekursiivisesti. Kompleksisuus on O(log n)
  * Palauttaa: Löydetyn solmun
- **********************************/
+ ***********************************************************/
 Solmu* etsiAvain(Solmu *solmu, int avain) {
     if(solmu == NULL)           return NULL;
     if(solmu->avain == avain)   return solmu;
@@ -251,9 +250,8 @@ void oikeaKierto(Solmu **ylin) {
         /* vasenkierto keski-solmulle */
         keski->vasen = alin->oikea; 
         alin->oikea = keski;
+        keski->korkeus = laskeKorkeus(keski);
         keski = alin;
-
-        alin->korkeus = laskeKorkeus(alin);
         keski->korkeus = laskeKorkeus(keski);
 
         /* oikeakierto ylin-solmulle */
